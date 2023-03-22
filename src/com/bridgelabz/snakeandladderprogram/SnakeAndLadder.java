@@ -34,6 +34,8 @@ public class SnakeAndLadder {
 			  newPosition = playerPosition - dice;
              if (newPosition >= 0) {
                  playerPosition = newPosition;
+             }else {
+            	 playerPosition = newPosition;
              }
 			
 			break;
@@ -41,5 +43,6 @@ public class SnakeAndLadder {
 
 		System.out.println("Player position: " + playerPosition);
 		 }
+		 System.out.println("Congratulations! You reached the final position of " + topPosition);
 	}
 }
