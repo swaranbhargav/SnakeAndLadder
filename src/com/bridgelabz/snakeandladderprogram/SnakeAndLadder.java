@@ -6,12 +6,14 @@ public class SnakeAndLadder {
 
 	public static void main(String[] args) {
 
-		int playerPosition = 0;
+		int playerOnePosition = 0;
 		int topPosition = 100;
 		int diceroll = 0;
 
+		int playerTwoPosition = 0;
+
 		Random rand = new Random();
-		while (playerPosition < topPosition) {
+		while (playerOnePosition < topPosition && playerTwoPosition < topPosition) {
 
 			int dice = rand.nextInt(6) + 1;
 
@@ -22,30 +24,44 @@ public class SnakeAndLadder {
 				break;
 			case 1:
 				System.out.println("You got Ladder");
-				playerPosition += dice;
-				int newPosition = playerPosition + dice;
-				if (newPosition <= topPosition) {
-					playerPosition = newPosition;
+				playerOnePosition += dice;
+				playerTwoPosition += dice;
+				int newPositionOfFirstPlayer = playerOnePosition + dice;
+				int newPositionOfSecondPlayer = playerTwoPosition + dice;
+				if (newPositionOfFirstPlayer <= topPosition && newPositionOfSecondPlayer <= topPosition) {
+					playerOnePosition = newPositionOfFirstPlayer;
+
+					playerTwoPosition = newPositionOfSecondPlayer;
 				}
 				break;
 			case 2:
 				System.out.println("you got snake");
-				playerPosition -= dice;
-				newPosition = playerPosition - dice;
-				if (newPosition >= 0) {
-					playerPosition = newPosition;
+				playerOnePosition -= dice;
+				playerTwoPosition -= dice;
+				newPositionOfFirstPlayer = playerOnePosition - dice;
+				newPositionOfSecondPlayer = playerTwoPosition - dice;
+				if (newPositionOfFirstPlayer >= 0 && newPositionOfSecondPlayer >= 0) {
+					playerOnePosition = newPositionOfFirstPlayer;
+					playerTwoPosition = newPositionOfSecondPlayer;
 				} else {
-					playerPosition = newPosition;
+					playerOnePosition = newPositionOfFirstPlayer;
+					playerTwoPosition = newPositionOfSecondPlayer;
 				}
 
 				break;
-				
+
 			}
 			diceroll++;
 			System.out.println("the no.of times the dice rolled is " + diceroll);
 
-			System.out.println("Player position: " + playerPosition);
+			System.out.println("Player One position: " + playerOnePosition);
+			System.out.println("Player Two position: " + playerTwoPosition);
 		}
-		System.out.println("Congratulations! You reached the final position of " + topPosition);
+		if (playerOnePosition > playerTwoPosition) {
+			System.out.println("player One won the game");
+		} else {
+			System.out.println("Player two won the game ");
+		}
+
 	}
 }
